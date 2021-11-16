@@ -9,6 +9,11 @@
     "node": ">=8",
     "npm": ">=5"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:andreferreiradaweb/react-add-modal.git"
+  },
+  "homepage": "https://github.com/andreferreiradaweb/react-add-modal",
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w"
