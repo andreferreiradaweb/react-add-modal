@@ -25,22 +25,21 @@ export const Modal: React.FC<ModalProps> = ({
   description = 'Some description here!',
   className,
   visible,
-  dismissible,
+  dismissible = true,
 }) => {
   const [isVisible, setIsVisible] = React.useState(visible);
 
   React.useEffect(() => {
-    if (dismissible) return;
     setIsVisible(visible);
-  }, [visible, dismissible]);
+  }, [visible]);
 
   const handleCancelModal = (): void => {
-    dismissible && setIsVisible(false);
+    setIsVisible(false);
   }
 
   const handleConfirmModal = (): void => {
-    onClose && onClose();
-    dismissible && setIsVisible(false);
+    onClose?.();
+    setIsVisible(false);
   }
 
   return (
@@ -84,7 +83,7 @@ export const Modal: React.FC<ModalProps> = ({
               </footer>
             </ModalElement>
           </Container>
-          <Overlay onClick={handleCancelModal} />
+          <Overlay onClick={() => dismissible && handleCancelModal()} />
         </Wrapper>
       )}
     </>
