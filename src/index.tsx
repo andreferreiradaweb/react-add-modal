@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components"
-import * as React from "react"
+import * as React from 'react'
 
 type variantPositionTypes =
   | "default"
@@ -17,6 +17,10 @@ export interface ModalProps {
   className?: string;
   visible: boolean;
   dismissible: boolean;
+  stylesOverlay?: React.CSSProperties;
+  stylesWrapper?: React.CSSProperties;
+  stylesContainer?: React.CSSProperties;
+  stylesModal?: React.CSSProperties;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -25,9 +29,13 @@ export const Modal: React.FC<ModalProps> = ({
   customPosition = "default",
   title = "Default Modal",
   description = 'Some description here!',
-  className,
   visible,
   dismissible = true,
+  stylesOverlay,
+  stylesWrapper,
+  stylesContainer,
+  stylesModal,
+  children
 }) => {
 
   const handleCancelModal = (): void => {
@@ -41,15 +49,19 @@ export const Modal: React.FC<ModalProps> = ({
   return (
     <>
       {visible && (
-        <Wrapper>
-          <Container data-testid="modal-container">
+        <Wrapper style={stylesWrapper}>
+          <Container style={stylesContainer} data-testid="modal-container">
             <ModalElement
+              style={stylesModal}
               data-testid="modal-element"
-              className={className}
               customPosition={customPosition}
             >
-              <strong>{title}</strong>
-              <p>{description}</p>
+            { children ?? 
+              <>
+                <strong>{title}</strong>
+                <p>{description}</p>
+              </>
+            }
               <footer>
                 {dismissible ? (
                   <>
@@ -79,7 +91,7 @@ export const Modal: React.FC<ModalProps> = ({
               </footer>
             </ModalElement>
           </Container>
-          <Overlay onClick={() => dismissible && handleCancelModal()} />
+          <Overlay style={stylesOverlay} onClick={() => dismissible && handleCancelModal()} />
         </Wrapper>
       )}
     </>
