@@ -13,6 +13,7 @@ export interface ModalProps {
   description?: string;
   customPosition?: variantPositionTypes;
   onClose?: () => void;
+  onConfirm?: () => void;
   className?: string;
   visible: boolean;
   dismissible: boolean;
@@ -20,6 +21,7 @@ export interface ModalProps {
 
 export const Modal: React.FC<ModalProps> = ({
   onClose,
+  onConfirm,
   customPosition = "default",
   title = "Default Modal",
   description = 'Some description here!',
@@ -27,24 +29,18 @@ export const Modal: React.FC<ModalProps> = ({
   visible,
   dismissible = true,
 }) => {
-  const [isVisible, setIsVisible] = React.useState(visible);
-
-  React.useEffect(() => {
-    setIsVisible(visible);
-  }, [visible]);
 
   const handleCancelModal = (): void => {
-    setIsVisible(false);
+    onClose?.();
   }
 
   const handleConfirmModal = (): void => {
-    onClose?.();
-    setIsVisible(false);
+    onConfirm?.();
   }
 
   return (
     <>
-      {isVisible && (
+      {visible && (
         <Wrapper>
           <Container data-testid="modal-container">
             <ModalElement
