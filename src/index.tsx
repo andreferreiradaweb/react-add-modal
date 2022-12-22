@@ -98,7 +98,7 @@ export const Modal: React.FC<ModalProps> = ({
   )
 }
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -106,7 +106,7 @@ const Wrapper = styled.div`
   z-index: 99998;
 `
 
-const Container = styled.div`
+export const Container = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
@@ -115,7 +115,7 @@ const Container = styled.div`
   height: 100%;
 `
 
-const variantPosition = {
+export const variantPosition = {
   default: css`
     position: relative;
   `,
@@ -141,11 +141,11 @@ const variantPosition = {
   `,
 }
 
-interface ModalElementProps {
+export interface ModalElementProps {
   customPosition: variantPositionTypes;
 }
 
-const ModalElement = styled.div<ModalElementProps>`
+export const ModalElement = styled.div<ModalElementProps>`
   ${({ customPosition }) => variantPosition[customPosition || "default"]};
   padding: 20px;
   z-index: 99999;
@@ -214,7 +214,7 @@ const ModalElement = styled.div<ModalElementProps>`
   }
 `
 
-const Overlay = styled.div`
+export const Overlay = styled.div`
   background: rgba(0, 0, 0, 0.3);
   width: 100%;
   height: 100%;
